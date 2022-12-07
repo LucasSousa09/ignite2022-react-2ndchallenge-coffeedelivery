@@ -39,6 +39,10 @@ export const CoffeeDescription = styled.div`
     line-height: 0.8125rem;
 
     text-transform: uppercase;
+
+    & + span {
+      margin-left: 4px;
+    }
   }
 
   strong {

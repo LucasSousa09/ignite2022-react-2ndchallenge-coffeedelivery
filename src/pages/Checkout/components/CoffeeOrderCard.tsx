@@ -4,7 +4,7 @@ import { AddQuantity } from '../../../components/AddQuantity'
 
 import { defaultTheme } from '../../../styles/theme/default'
 
-import coffeeImg from '../../../assets/coffes/coffee-1.png'
+import coffeeImg from '../../../assets/coffees/coffee-1.png'
 import { CoffeeOrder, CoffeeOrderCardContainer } from './styles'
 
 export function CoffeeOrderCard() {

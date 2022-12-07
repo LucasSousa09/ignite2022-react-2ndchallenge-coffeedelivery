@@ -1,5 +1,3 @@
-import coffeeImg from '../../../../assets/coffes/coffee-1.png'
-
 import { ShoppingCart } from 'phosphor-react'
 import { defaultTheme } from '../../../../styles/theme/default'
 
@@ -9,18 +7,33 @@ import {
   AddQuantityToCartContainer,
   AddToCartButton,
 } from './styles'
+
 import { AddQuantity } from '../../../../components/AddQuantity'
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  coffeeImgSrc: string
+  name: string
+  description: string
+  tags: string[]
+}
+
+export function CoffeeCard({
+  coffeeImgSrc,
+  name,
+  description,
+  tags,
+}: CoffeeCardProps) {
   return (
     <CoffeeCardContainer>
       <CoffeeDescription>
-        <img src={coffeeImg} alt="" />
+        <img src={coffeeImgSrc} alt="" />
         <div>
-          <span>Tradicional</span>
+          {tags.map((tag) => (
+            <span key={name + tag}>{tag}</span>
+          ))}
         </div>
-        <strong>Expresso Tradicional</strong>
-        <p>O tradional café feito com quente e grãos moídos</p>
+        <strong>{name}</strong>
+        <p>{description}</p>
       </CoffeeDescription>
 
       <AddQuantityToCartContainer>

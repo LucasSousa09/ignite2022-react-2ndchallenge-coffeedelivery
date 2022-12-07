@@ -1,4 +1,10 @@
-import heroImg from '../../assets/hero-image.png'
+import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react'
+
+import { CoffeeCard } from './components/CoffeeCard'
+import { Snippet } from './components/Snippet'
+
+import { defaultTheme } from '../../styles/theme/default'
+
 import {
   CoffeCardsContainer,
   CoffesContainer,
@@ -6,10 +12,8 @@ import {
   SnippetsContainer,
 } from './styles'
 
-import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react'
-import { defaultTheme } from '../../styles/theme/default'
-import { CoffeeCard } from './components/CoffeeCard'
-import { Snippet } from './components/Snippet'
+import heroImg from '../../assets/hero-image.png'
+import coffees from '../../../coffees.json'
 
 export function Home() {
   return (
@@ -61,11 +65,15 @@ export function Home() {
       <CoffesContainer>
         <h2>Nossos Cafés</h2>
         <CoffeCardsContainer>
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+          {coffees.coffees.map((coffee) => (
+            <CoffeeCard
+              key={coffee.name}
+              coffeeImgSrc={coffee.coffeeSrc}
+              name={coffee.name}
+              description={coffee.description}
+              tags={coffee.tags}
+            />
+          ))}
         </CoffeCardsContainer>
       </CoffesContainer>
     </>
