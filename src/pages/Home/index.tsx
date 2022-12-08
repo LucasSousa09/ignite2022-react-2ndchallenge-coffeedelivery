@@ -13,9 +13,12 @@ import {
 } from './styles'
 
 import heroImg from '../../assets/hero-image.png'
-import coffees from '../../../coffees.json'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContextProvider'
 
 export function Home() {
+  const { coffees } = useContext(CartContext)
+
   return (
     <>
       <MainContainer>
@@ -65,13 +68,14 @@ export function Home() {
       <CoffesContainer>
         <h2>Nossos Cafés</h2>
         <CoffeCardsContainer>
-          {coffees.coffees.map((coffee) => (
+          {coffees.map((coffee) => (
             <CoffeeCard
               key={coffee.name}
               coffeeImgSrc={coffee.coffeeSrc}
               name={coffee.name}
               description={coffee.description}
               tags={coffee.tags}
+              quantity={coffee.quantity}
             />
           ))}
         </CoffeCardsContainer>

@@ -15,6 +15,7 @@ interface CoffeeCardProps {
   name: string
   description: string
   tags: string[]
+  quantity: number
 }
 
 export function CoffeeCard({
@@ -22,6 +23,7 @@ export function CoffeeCard({
   name,
   description,
   tags,
+  quantity,
 }: CoffeeCardProps) {
   return (
     <CoffeeCardContainer>
@@ -40,7 +42,7 @@ export function CoffeeCard({
         <span>
           R$ <strong>9,90</strong>
         </span>
-        <AddQuantity />
+        <AddQuantity quantity={quantity} coffeeName={name} />
         <div>
           <AddToCartButton>
             <ShoppingCart size={22} weight="fill" color={defaultTheme.white} />
