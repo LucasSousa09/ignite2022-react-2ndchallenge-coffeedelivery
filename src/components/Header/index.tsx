@@ -8,13 +8,15 @@ import { defaultTheme } from '../../styles/theme/default'
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={logoImg} alt="" />
+      <a href="/">
+        <img src={logoImg} alt="" />
+      </a>
       <div>
         <UserLocale>
           <MapPin weight="fill" size={20} color={defaultTheme.purple} />
           Porto Alegre, RS
         </UserLocale>
-        <CartLink href="#">
+        <CartLink href="/checkout">
           <ShoppingCart
             weight="fill"
             size={19}

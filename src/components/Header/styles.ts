@@ -11,6 +11,10 @@ export const HeaderContainer = styled.header`
     gap: 0.75rem;
     align-items: center;
   }
+
+  & > a {
+    height: 40px;
+  }
 `
 
 export const CartLink = styled.a`

@@ -11,7 +11,11 @@ interface Coffee {
 
 interface CartContextProps {
   coffees: Coffee[]
-  setAmountOfCoffies: (coffeeName: string, type: 'add' | 'remove') => void
+  setAmountOfCoffies: (
+    coffeeName: string,
+    type: 'add' | 'remove' | 'typpedValue',
+    typpedValue?: string,
+  ) => void
 }
 
 export const CartContext = createContext({} as CartContextProps)
@@ -31,7 +35,11 @@ export function CartContextProvider({ children }: CartContainerProviderProps) {
     )
   }, [])
 
-  function setAmountOfCoffies(coffeeName: string, type: 'add' | 'remove') {
+  function setAmountOfCoffies(
+    coffeeName: string,
+    type: 'add' | 'remove' | 'typpedValue',
+    typpedValue?: string,
+  ) {
     if (type === 'add') {
       setCoffees((state) => {
         return state.map((coffee) => {
@@ -47,6 +55,21 @@ export function CartContextProvider({ children }: CartContainerProviderProps) {
         return state.map((coffee) => {
           if (coffee.name === coffeeName && coffee.quantity > 0) {
             return { ...coffee, quantity: coffee.quantity - 1 }
+          }
+          return coffee
+        })
+      })
+    }
+    if (type === 'typpedValue') {
+      setCoffees((state) => {
+        return state.map((coffee) => {
+          if (coffee.name === coffeeName && typpedValue) {
+            return {
+              ...coffee,
+              quantity: isNaN(Number(typpedValue))
+                ? coffee.quantity
+                : Number(typpedValue),
+            }
           }
           return coffee
         })
