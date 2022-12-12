@@ -4,18 +4,27 @@ import { AddQuantity } from '../../../components/AddQuantity'
 
 import { defaultTheme } from '../../../styles/theme/default'
 
-import coffeeImg from '../../../assets/coffees/coffee-1.png'
 import { CoffeeOrder, CoffeeOrderCardContainer } from './styles'
 
-export function CoffeeOrderCard() {
+interface CoffeeOrderCardProps {
+  coffeeImg: string
+  coffeeName: string
+  quantity: number
+}
+
+export function CoffeeOrderCard({
+  coffeeImg,
+  coffeeName,
+  quantity,
+}: CoffeeOrderCardProps) {
   return (
     <CoffeeOrderCardContainer>
       <img src={coffeeImg} alt="" />
       <CoffeeOrder>
-        <span>Expresso Tradicional</span>
+        <span>{coffeeName}</span>
         <div>
-          <AddQuantity size={2} />
-          <button>
+          <AddQuantity size={2} quantity={quantity} coffeeName={coffeeName} />
+          <button type="button">
             <Trash size={16} color={defaultTheme.purple} /> Remover
           </button>
         </div>

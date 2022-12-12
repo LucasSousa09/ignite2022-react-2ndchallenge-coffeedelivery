@@ -5,6 +5,8 @@ import {
   Bank,
   CreditCard,
 } from 'phosphor-react'
+import { useContext, useEffect } from 'react'
+import { CartContext } from '../../contexts/CartContextProvider'
 
 import { defaultTheme } from '../../styles/theme/default'
 import { CoffeeOrderCard } from './components/CoffeeOrderCard'
@@ -27,6 +29,12 @@ import {
 } from './styles'
 
 export function Checkout() {
+  const { cart } = useContext(CartContext)
+
+  useEffect(() => {
+    console.log(cart)
+  }, [cart])
+
   return (
     <CheckoutContainer>
       <form>
@@ -128,8 +136,14 @@ export function Checkout() {
         <div>
           <h2>Cafés selecionados</h2>
           <InputContainer coffeeOrder>
-            <CoffeeOrderCard />
-            <CoffeeOrderCard />
+            {cart.map((coffee) => (
+              <CoffeeOrderCard
+                coffeeImg={coffee.coffeeImgSrc}
+                coffeeName={coffee.name}
+                quantity={coffee.quantity}
+                key={coffee.name}
+              />
+            ))}
             <PaymentConfirmation>
               <div>
                 <span>Total de itens</span>
@@ -144,7 +158,9 @@ export function Checkout() {
                 <strong>R$ 33,20</strong>
               </div>
             </PaymentConfirmation>
-            <OrderConfirmationButton>Confirmar Pedido</OrderConfirmationButton>
+            <OrderConfirmationButton type="submit">
+              Confirmar Pedido
+            </OrderConfirmationButton>
           </InputContainer>
         </div>
       </form>

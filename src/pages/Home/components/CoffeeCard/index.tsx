@@ -9,6 +9,8 @@ import {
 } from './styles'
 
 import { AddQuantity } from '../../../../components/AddQuantity'
+import { useContext } from 'react'
+import { CartContext } from '../../../../contexts/CartContextProvider'
 
 interface CoffeeCardProps {
   coffeeImgSrc: string
@@ -25,6 +27,8 @@ export function CoffeeCard({
   tags,
   quantity,
 }: CoffeeCardProps) {
+  const { updateCartCoffees } = useContext(CartContext)
+
   return (
     <CoffeeCardContainer>
       <CoffeeDescription>
@@ -43,11 +47,13 @@ export function CoffeeCard({
           R$ <strong>9,90</strong>
         </span>
         <AddQuantity quantity={quantity} coffeeName={name} />
-        <div>
-          <AddToCartButton>
-            <ShoppingCart size={22} weight="fill" color={defaultTheme.white} />
-          </AddToCartButton>
-        </div>
+
+        <AddToCartButton
+          disabled={quantity === 0}
+          onClick={() => updateCartCoffees({ name, quantity, coffeeImgSrc })}
+        >
+          <ShoppingCart size={22} weight="fill" color={defaultTheme.white} />
+        </AddToCartButton>
       </AddQuantityToCartContainer>
     </CoffeeCardContainer>
   )

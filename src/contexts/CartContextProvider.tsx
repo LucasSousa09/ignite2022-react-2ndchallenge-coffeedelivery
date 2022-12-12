@@ -9,8 +9,16 @@ interface Coffee {
   description: string
 }
 
+interface CartCoffee {
+  name: string
+  quantity: number
+  coffeeImgSrc: string
+}
+
 interface CartContextProps {
   coffees: Coffee[]
+  cart: CartCoffee[]
+  updateCartCoffees: (props: CartCoffee) => void
   setAmountOfCoffies: (
     coffeeName: string,
     type: 'add' | 'remove' | 'typpedValue',
@@ -26,6 +34,7 @@ interface CartContainerProviderProps {
 
 export function CartContextProvider({ children }: CartContainerProviderProps) {
   const [coffees, setCoffees] = useState<Coffee[]>([])
+  const [cart, setCart] = useState<CartCoffee[]>([])
 
   useEffect(() => {
     setCoffees(
@@ -77,8 +86,28 @@ export function CartContextProvider({ children }: CartContainerProviderProps) {
     }
   }
 
+  function updateCartCoffees(newCoffee: CartCoffee) {
+    const hasCoffeeOnCart = cart.findIndex(
+      (coffee) => coffee.name === newCoffee.name,
+    )
+    if (hasCoffeeOnCart === -1) {
+      setCart([...cart, newCoffee])
+    } else {
+      setCart((state) => {
+        return state.map((coffee) => {
+          if (coffee.name === newCoffee.name) {
+            return { ...coffee, quantity: newCoffee.quantity }
+          }
+          return coffee
+        })
+      })
+    }
+  }
+
   return (
-    <CartContext.Provider value={{ coffees, setAmountOfCoffies }}>
+    <CartContext.Provider
+      value={{ coffees, setAmountOfCoffies, updateCartCoffees, cart }}
+    >
       {children}
     </CartContext.Provider>
   )
