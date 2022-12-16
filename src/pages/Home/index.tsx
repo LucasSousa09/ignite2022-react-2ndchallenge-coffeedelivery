@@ -1,3 +1,4 @@
+import coffeesDb from '../../../coffees.json'
 import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react'
 
 import { CoffeeCard } from './components/CoffeeCard'
@@ -13,11 +14,27 @@ import {
 } from './styles'
 
 import heroImg from '../../assets/hero-image.png'
-import { useContext } from 'react'
-import { CartContext } from '../../contexts/CartContextProvider'
+import { useEffect, useState } from 'react'
+
+interface CoffeeProps {
+  name: string
+  tags: string[]
+  quantity: number
+  price: number
+  coffeeSrc: string
+  description: string
+}
 
 export function Home() {
-  const { coffees } = useContext(CartContext)
+  const [coffees, setCoffees] = useState<CoffeeProps[]>([])
+
+  useEffect(() => {
+    setCoffees(
+      coffeesDb.coffees.map((coffee) => {
+        return { ...coffee, quantity: 0 }
+      }),
+    )
+  }, [])
 
   return (
     <>
@@ -71,11 +88,12 @@ export function Home() {
           {coffees.map((coffee) => (
             <CoffeeCard
               key={coffee.name}
-              coffeeImgSrc={coffee.coffeeSrc}
               name={coffee.name}
-              description={coffee.description}
               tags={coffee.tags}
+              price={coffee.price}
               quantity={coffee.quantity}
+              coffeeImgSrc={coffee.coffeeSrc}
+              description={coffee.description}
             />
           ))}
         </CoffeCardsContainer>

@@ -197,7 +197,7 @@ export const PaymentConfirmation = styled.div`
 `
 
 export const OrderConfirmationButton = styled.button`
-  padding: 12px;
+  padding: 12px 24px;
 
   border: 0;
   border-radius: 6px;
@@ -210,4 +210,15 @@ export const OrderConfirmationButton = styled.button`
   background-color: ${(props) => props.theme.yellow};
 
   text-transform: uppercase;
+
+  transition: background-color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: ${(props) => props.theme['yellow-dark']};
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 `

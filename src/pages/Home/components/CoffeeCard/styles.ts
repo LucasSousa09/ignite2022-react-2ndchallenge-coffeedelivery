@@ -90,25 +90,3 @@ export const AddQuantityToCartContainer = styled.div`
     align-items: center;
   }
 `
-
-export const AddToCartButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-left: 8px;
-
-  border-radius: 6px;
-
-  width: 2.375rem;
-  height: 2.375rem;
-
-  background-color: ${(props) => props.theme['purple-dark']};
-  border: none;
-
-  cursor: pointer;
-
-  &:focus {
-    box-shadow: 0 0 0 2px ${(props) => props.theme.yellow};
-  }
-`

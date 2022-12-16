@@ -5,10 +5,11 @@ import {
   Bank,
   CreditCard,
 } from 'phosphor-react'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { CartContext } from '../../contexts/CartContextProvider'
 
 import { defaultTheme } from '../../styles/theme/default'
+import { formatPrice } from '../../utils/formatPrice'
 import { CoffeeOrderCard } from './components/CoffeeOrderCard'
 
 import {
@@ -31,9 +32,14 @@ import {
 export function Checkout() {
   const { cart } = useContext(CartContext)
 
-  useEffect(() => {
-    console.log(cart)
-  }, [cart])
+  const totalOfItemsPrice = cart.reduce(
+    (acc, coffee) => acc + coffee.price * coffee.quantity,
+    0,
+  )
+
+  const shipmentTax = 3.5
+
+  const totalBiling = shipmentTax + totalOfItemsPrice
 
   return (
     <CheckoutContainer>
@@ -136,29 +142,43 @@ export function Checkout() {
         <div>
           <h2>Cafés selecionados</h2>
           <InputContainer coffeeOrder>
-            {cart.map((coffee) => (
-              <CoffeeOrderCard
-                coffeeImg={coffee.coffeeImgSrc}
-                coffeeName={coffee.name}
-                quantity={coffee.quantity}
-                key={coffee.name}
-              />
-            ))}
+            {cart.map((coffee) => {
+              return (
+                <CoffeeOrderCard
+                  key={coffee.name}
+                  price={coffee.price}
+                  quantity={coffee.quantity}
+                  coffeeImg={coffee.coffeeImgSrc}
+                  coffeeName={coffee.name}
+                />
+              )
+            })}
             <PaymentConfirmation>
               <div>
                 <span>Total de itens</span>
-                <span>R$ 29,70</span>
+                <span>{formatPrice(totalOfItemsPrice)}</span>
               </div>
               <div>
                 <span>Entrega</span>
-                <span>R$ 3,50</span>
+                <span>
+                  {!totalOfItemsPrice
+                    ? formatPrice(0)
+                    : formatPrice(shipmentTax)}
+                </span>
               </div>
               <div>
                 <strong>Total</strong>
-                <strong>R$ 33,20</strong>
+                <strong>
+                  {!totalOfItemsPrice
+                    ? formatPrice(0)
+                    : formatPrice(totalBiling)}
+                </strong>
               </div>
             </PaymentConfirmation>
-            <OrderConfirmationButton type="submit">
+            <OrderConfirmationButton
+              disabled={!totalOfItemsPrice}
+              type="submit"
+            >
               Confirmar Pedido
             </OrderConfirmationButton>
           </InputContainer>

@@ -1,34 +1,29 @@
-import { ShoppingCart } from 'phosphor-react'
-import { defaultTheme } from '../../../../styles/theme/default'
-
 import {
   CoffeeCardContainer,
   CoffeeDescription,
   AddQuantityToCartContainer,
-  AddToCartButton,
 } from './styles'
 
 import { AddQuantity } from '../../../../components/AddQuantity'
-import { useContext } from 'react'
-import { CartContext } from '../../../../contexts/CartContextProvider'
+import { formatPrice } from '../../../../utils/formatPrice'
 
 interface CoffeeCardProps {
-  coffeeImgSrc: string
   name: string
-  description: string
   tags: string[]
+  price: number
   quantity: number
+  description: string
+  coffeeImgSrc: string
 }
 
 export function CoffeeCard({
-  coffeeImgSrc,
   name,
-  description,
   tags,
+  price,
   quantity,
+  description,
+  coffeeImgSrc,
 }: CoffeeCardProps) {
-  const { updateCartCoffees } = useContext(CartContext)
-
   return (
     <CoffeeCardContainer>
       <CoffeeDescription>
@@ -44,16 +39,9 @@ export function CoffeeCard({
 
       <AddQuantityToCartContainer>
         <span>
-          R$ <strong>9,90</strong>
+          <strong>{formatPrice(price)}</strong>
         </span>
-        <AddQuantity quantity={quantity} coffeeName={name} />
-
-        <AddToCartButton
-          disabled={quantity === 0}
-          onClick={() => updateCartCoffees({ name, quantity, coffeeImgSrc })}
-        >
-          <ShoppingCart size={22} weight="fill" color={defaultTheme.white} />
-        </AddToCartButton>
+        <AddQuantity name={name} coffeeImgSrc={coffeeImgSrc} addToCartButton />
       </AddQuantityToCartContainer>
     </CoffeeCardContainer>
   )
