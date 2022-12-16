@@ -18,7 +18,12 @@ export const HeaderContainer = styled.header`
   }
 `
 
-export const CartLink = styled(Link)`
+interface CartLinkProps {
+  hasItemsOnCart: number
+}
+
+export const CartLink = styled(Link)<CartLinkProps>`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,6 +32,29 @@ export const CartLink = styled(Link)`
 
   padding: 0.5rem;
   background-color: ${(props) => props.theme['yellow-light']};
+
+  &::after {
+    content: '${(props) => String(props.hasItemsOnCart)}';
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+
+    display: ${(props) => (props.hasItemsOnCart ? 'flex' : 'none')};
+    align-items: center;
+    justify-content: center;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    border-radius: 999px;
+
+    font-weight: 700;
+    font-size: 0.75rem;
+    line-height: 0.975rem;
+
+    color: ${(props) => props.theme.white};
+    background-color: ${(props) => props.theme['yellow-dark']};
+  }
 `
 
 export const UserLocale = styled.span`
