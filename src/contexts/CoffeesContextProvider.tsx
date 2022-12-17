@@ -12,7 +12,7 @@ interface CoffeeProps {
 
 interface CoffeesContextProps {
   coffees: CoffeeProps[]
-  updateCoffeesQuantity: () => void
+  updateCoffeesQuantity: (name: string, quantity: number) => void
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextProps)
@@ -34,8 +34,15 @@ export function CoffeesContextProvider({
     )
   }, [])
 
-  function updateCoffeesQuantity() {
-    console.log('Quantity Updated')
+  function updateCoffeesQuantity(coffeeName: string, quantity: number) {
+    setCoffees((state) =>
+      state.map((coffee) => {
+        if (coffeeName === coffee.name) {
+          return { ...coffee, quantity }
+        }
+        return coffee
+      }),
+    )
   }
 
   return (

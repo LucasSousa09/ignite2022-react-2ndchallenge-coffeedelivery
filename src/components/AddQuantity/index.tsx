@@ -39,7 +39,7 @@ export function AddQuantity({
         name,
         quantity: coffeeQuantity,
       })
-      updateCoffeesQuantity()
+      updateCoffeesQuantity(name, coffeeQuantity)
     }
   }, [coffeeQuantity, addToCartButton])
 
@@ -71,7 +71,7 @@ export function AddQuantity({
               name,
               quantity: Number(evt.target.value),
             })
-            updateCoffeesQuantity()
+            updateCoffeesQuantity(name, Number(evt.target.value))
           }
         }}
       />

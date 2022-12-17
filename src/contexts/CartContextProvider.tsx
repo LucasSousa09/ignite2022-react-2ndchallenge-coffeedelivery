@@ -34,7 +34,12 @@ export function CartContextProvider({ children }: CartContainerProviderProps) {
     quantity,
     coffeeImgSrc,
   }: CartCoffee) {
-    setCart([...cart, { name, price, quantity, coffeeImgSrc }])
+    const hasCoffeeOnCartIndex = cart.findIndex(
+      (coffee) => coffee.name === name,
+    )
+    if (hasCoffeeOnCartIndex === -1) {
+      setCart([...cart, { name, price, quantity, coffeeImgSrc }])
+    }
   }
 
   function updateCartCoffees({ name, quantity }: updateCoffeeQuantityProps) {
