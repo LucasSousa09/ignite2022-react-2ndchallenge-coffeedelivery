@@ -5,6 +5,7 @@ import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { AddQuantityContainer, AddToCartButton } from './styles'
 import { defaultTheme } from '../../styles/theme/default'
 import { CartContext } from '../../contexts/CartContextProvider'
+import { CoffeesContext } from '../../contexts/CoffeesContextProvider'
 
 interface AddQuantityProps {
   size?: number
@@ -29,26 +30,34 @@ export function AddQuantity({
 
   const [coffeeQuantity, setCoffeeQuantity] = useState<number>(0)
 
-  const { updateCartCoffees } = useContext(CartContext)
+  const { updateCartCoffees, addCoffeeToCart } = useContext(CartContext)
+  const { updateCoffeesQuantity } = useContext(CoffeesContext)
+
+  useEffect(() => {
+    if (!addToCartButton) {
+      updateCartCoffees({
+        name,
+        quantity: coffeeQuantity,
+      })
+      updateCoffeesQuantity()
+    }
+  }, [coffeeQuantity, addToCartButton])
+
+  function handleDecreaseOneCoffee() {
+    setCoffeeQuantity((state) => {
+      return state - 1
+    })
+  }
+
+  function handleAddOneCoffee() {
+    setCoffeeQuantity((state) => {
+      return state + 1
+    })
+  }
 
   return (
     <AddQuantityContainer size={size}>
-      <button
-        type="button"
-        onClick={() => {
-          setCoffeeQuantity((state) => {
-            if (!addToCartButton) {
-              updateCartCoffees({
-                name,
-                price: 9.9,
-                coffeeImgSrc,
-                quantity: state - 1,
-              })
-            }
-            return state - 1
-          })
-        }}
-      >
+      <button type="button" onClick={handleDecreaseOneCoffee}>
         {<Minus size={14} color={defaultTheme.purple} />}
       </button>
 
@@ -60,29 +69,13 @@ export function AddQuantity({
           if (!addToCartButton) {
             updateCartCoffees({
               name,
-              price: 9.9,
-              coffeeImgSrc,
               quantity: Number(evt.target.value),
             })
+            updateCoffeesQuantity()
           }
         }}
       />
-      <button
-        type="button"
-        onClick={() => {
-          setCoffeeQuantity((state) => {
-            if (!addToCartButton) {
-              updateCartCoffees({
-                name,
-                price: 9.9,
-                coffeeImgSrc,
-                quantity: state + 1,
-              })
-            }
-            return state + 1
-          })
-        }}
-      >
+      <button type="button" onClick={handleAddOneCoffee}>
         {<Plus size={14} color={defaultTheme.purple} />}
       </button>
 
@@ -90,7 +83,7 @@ export function AddQuantity({
         <AddToCartButton
           disabled={coffeeQuantity === 0}
           onClick={() =>
-            updateCartCoffees({
+            addCoffeeToCart({
               name,
               price: 9.9,
               coffeeImgSrc,

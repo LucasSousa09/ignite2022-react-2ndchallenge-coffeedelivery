@@ -7,9 +7,15 @@ interface CartCoffee {
   coffeeImgSrc: string
 }
 
+interface updateCoffeeQuantityProps {
+  name: string
+  quantity: number
+}
+
 interface CartContextProps {
   cart: CartCoffee[]
-  updateCartCoffees: (props: CartCoffee) => void
+  addCoffeeToCart: (props: CartCoffee) => void
+  updateCartCoffees: (props: updateCoffeeQuantityProps) => void
   removeCartCoffees: (coffeeName: string) => void
 }
 
@@ -22,25 +28,24 @@ interface CartContainerProviderProps {
 export function CartContextProvider({ children }: CartContainerProviderProps) {
   const [cart, setCart] = useState<CartCoffee[]>([])
 
-  function updateCartCoffees({
+  function addCoffeeToCart({
     name,
     price,
     quantity,
     coffeeImgSrc,
   }: CartCoffee) {
-    const hasCoffeeOnCart = cart.findIndex((coffee) => coffee.name === name)
-    if (hasCoffeeOnCart === -1) {
-      setCart([...cart, { name, price, quantity, coffeeImgSrc }])
-    } else {
-      setCart((state) => {
-        return state.map((coffee) => {
-          if (coffee.name === name) {
-            return { ...coffee, quantity }
-          }
-          return coffee
-        })
+    setCart([...cart, { name, price, quantity, coffeeImgSrc }])
+  }
+
+  function updateCartCoffees({ name, quantity }: updateCoffeeQuantityProps) {
+    setCart((state) => {
+      return state.map((coffee) => {
+        if (coffee.name === name) {
+          return { ...coffee, quantity }
+        }
+        return coffee
       })
-    }
+    })
   }
 
   function removeCartCoffees(coffeeName: string) {
@@ -50,6 +55,7 @@ export function CartContextProvider({ children }: CartContainerProviderProps) {
   return (
     <CartContext.Provider
       value={{
+        addCoffeeToCart,
         updateCartCoffees,
         removeCartCoffees,
         cart,

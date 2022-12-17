@@ -19,7 +19,7 @@ export const HeaderContainer = styled.header`
 `
 
 interface CartLinkProps {
-  hasItemsOnCart: number
+  hasitemoncart: number
 }
 
 export const CartLink = styled(Link)<CartLinkProps>`
@@ -34,12 +34,12 @@ export const CartLink = styled(Link)<CartLinkProps>`
   background-color: ${(props) => props.theme['yellow-light']};
 
   &::after {
-    content: '${(props) => String(props.hasItemsOnCart)}';
+    content: '${(props) => String(props.hasitemoncart)}';
     position: absolute;
     top: -0.5rem;
     right: -0.5rem;
 
-    display: ${(props) => (props.hasItemsOnCart ? 'flex' : 'none')};
+    display: ${(props) => (props.hasitemoncart ? 'flex' : 'none')};
     align-items: center;
     justify-content: center;
 

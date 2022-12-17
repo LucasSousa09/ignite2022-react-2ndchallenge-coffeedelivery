@@ -41,7 +41,12 @@ export function CoffeeCard({
         <span>
           <strong>{formatPrice(price)}</strong>
         </span>
-        <AddQuantity name={name} coffeeImgSrc={coffeeImgSrc} addToCartButton />
+        <AddQuantity
+          quantity={quantity}
+          name={name}
+          coffeeImgSrc={coffeeImgSrc}
+          addToCartButton
+        />
       </AddQuantityToCartContainer>
     </CoffeeCardContainer>
   )

@@ -24,7 +24,7 @@ export function Header() {
         </UserLocale>
         <CartLink
           to="/checkout"
-          hasItemsOnCart={cart.length > 0 ? cart.length : 0}
+          hasitemoncart={cart.length > 0 ? cart.length : 0}
         >
           <ShoppingCart
             weight="fill"

@@ -1,7 +1,9 @@
-import coffeesDb from '../../../coffees.json'
 import { ShoppingCart, Timer, Package, Coffee } from 'phosphor-react'
+import { useContext } from 'react'
 
-import { CoffeeCard } from './components/CoffeeCard'
+import { CoffeesContext } from '../../contexts/CoffeesContextProvider'
+
+import { CoffeeCard } from './components/CoffeeCard/'
 import { Snippet } from './components/Snippet'
 
 import { defaultTheme } from '../../styles/theme/default'
@@ -14,27 +16,9 @@ import {
 } from './styles'
 
 import heroImg from '../../assets/hero-image.png'
-import { useEffect, useState } from 'react'
-
-interface CoffeeProps {
-  name: string
-  tags: string[]
-  quantity: number
-  price: number
-  coffeeSrc: string
-  description: string
-}
 
 export function Home() {
-  const [coffees, setCoffees] = useState<CoffeeProps[]>([])
-
-  useEffect(() => {
-    setCoffees(
-      coffeesDb.coffees.map((coffee) => {
-        return { ...coffee, quantity: 0 }
-      }),
-    )
-  }, [])
+  const { coffees } = useContext(CoffeesContext)
 
   return (
     <>
@@ -85,17 +69,19 @@ export function Home() {
       <CoffesContainer>
         <h2>Nossos Cafés</h2>
         <CoffeCardsContainer>
-          {coffees.map((coffee) => (
-            <CoffeeCard
-              key={coffee.name}
-              name={coffee.name}
-              tags={coffee.tags}
-              price={coffee.price}
-              quantity={coffee.quantity}
-              coffeeImgSrc={coffee.coffeeSrc}
-              description={coffee.description}
-            />
-          ))}
+          {coffees.map((coffee) => {
+            return (
+              <CoffeeCard
+                key={coffee.name}
+                name={coffee.name}
+                tags={coffee.tags}
+                price={coffee.price}
+                quantity={coffee.quantity}
+                coffeeImgSrc={coffee.coffeeSrc}
+                description={coffee.description}
+              />
+            )
+          })}
         </CoffeCardsContainer>
       </CoffesContainer>
     </>
