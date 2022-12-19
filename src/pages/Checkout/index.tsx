@@ -73,8 +73,14 @@ export function Checkout() {
   }
 
   function handleSentShipmentAddress(data: ShipingFormData) {
-    setShipingInformation(data)
-    navigate('/success-transaction')
+    if (cart.length > 0) {
+      setShipingInformation(data)
+      navigate('/success-transaction')
+    } else {
+      console.log(
+        'Seu carrinho está vazio, adicione pelo menos um café antes de concluir a compra',
+      )
+    }
   }
 
   return (

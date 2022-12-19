@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
+import { CoffeesContext } from './CoffeesContextProvider'
 
 interface CartCoffee {
   name: string
@@ -26,7 +33,27 @@ interface CartContainerProviderProps {
 }
 
 export function CartContextProvider({ children }: CartContainerProviderProps) {
-  const [cart, setCart] = useState<CartCoffee[]>([])
+  const { updateCoffeesQuantity } = useContext(CoffeesContext)
+
+  const [cart, setCart] = useState<CartCoffee[]>(() => {
+    const storedStateAsJSON = localStorage.getItem(
+      '@coffee-delivery:cart-state-1.0.0',
+    )
+    if (storedStateAsJSON) {
+      return JSON.parse(storedStateAsJSON)
+    }
+    return []
+  })
+
+  useEffect(() => {
+    const cartStateJSON = JSON.stringify(cart)
+
+    cart.forEach((coffee) =>
+      updateCoffeesQuantity(coffee.name, coffee.quantity),
+    )
+
+    localStorage.setItem('@coffee-delivery:cart-state-1.0.0', cartStateJSON)
+  }, [cart, updateCoffeesQuantity])
 
   function addCoffeeToCart({
     name,
@@ -40,6 +67,14 @@ export function CartContextProvider({ children }: CartContainerProviderProps) {
     if (hasCoffeeOnCartIndex === -1) {
       setCart([...cart, { name, price, quantity, coffeeImgSrc }])
     }
+    setCart((state) =>
+      state.map((coffee) => {
+        if (coffee.name === name) {
+          return { ...coffee, quantity }
+        }
+        return coffee
+      }),
+    )
   }
 
   function updateCartCoffees({ name, quantity }: updateCoffeeQuantityProps) {

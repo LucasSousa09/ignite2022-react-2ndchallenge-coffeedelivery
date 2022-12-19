@@ -27,7 +27,7 @@ export function CoffeesContextProvider({
   const [coffees, setCoffees] = useState<CoffeeProps[]>([])
 
   useEffect(() => {
-    setCoffees(
+    setCoffees(() =>
       coffeesDb.coffees.map((coffee) => {
         return { ...coffee, quantity: 0 }
       }),

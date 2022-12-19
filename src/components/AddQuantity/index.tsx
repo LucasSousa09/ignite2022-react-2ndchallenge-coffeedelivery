@@ -5,7 +5,7 @@ import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { AddQuantityContainer, AddToCartButton } from './styles'
 import { defaultTheme } from '../../styles/theme/default'
 import { CartContext } from '../../contexts/CartContextProvider'
-import { CoffeesContext } from '../../contexts/CoffeesContextProvider'
+// import { CoffeesContext } from '../../contexts/CoffeesContextProvider'
 
 interface AddQuantityProps {
   size?: number
@@ -31,7 +31,7 @@ export function AddQuantity({
   const [coffeeQuantity, setCoffeeQuantity] = useState<number>(0)
 
   const { updateCartCoffees, addCoffeeToCart } = useContext(CartContext)
-  const { updateCoffeesQuantity } = useContext(CoffeesContext)
+  // const { updateCoffeesQuantity } = useContext(CoffeesContext)
 
   useEffect(() => {
     if (!addToCartButton) {
@@ -39,7 +39,7 @@ export function AddQuantity({
         name,
         quantity: coffeeQuantity,
       })
-      updateCoffeesQuantity(name, coffeeQuantity)
+      // updateCoffeesQuantity(name, coffeeQuantity)
     }
   }, [coffeeQuantity, addToCartButton])
 
@@ -74,7 +74,7 @@ export function AddQuantity({
               name,
               quantity: Number(evt.target.value),
             })
-            updateCoffeesQuantity(name, Number(evt.target.value))
+            // updateCoffeesQuantity(name, Number(evt.target.value))
           }
         }}
       />
