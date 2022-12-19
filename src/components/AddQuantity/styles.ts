@@ -26,6 +26,13 @@ export const AddQuantityContainer = styled.div<AddQuantityProps>`
     }
   }
 
+  & > button:first-of-type,
+  & > button:nth-child(3) {
+    &:hover {
+      color: ${(props) => props.theme['purple-dark']};
+    }
+  }
+
   input {
     color: ${(props) => props.theme['base-title']};
     text-align: center;

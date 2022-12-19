@@ -45,7 +45,10 @@ export function AddQuantity({
 
   function handleDecreaseOneCoffee() {
     setCoffeeQuantity((state) => {
-      return state - 1
+      if (state > 0) {
+        return state - 1
+      }
+      return state
     })
   }
 
@@ -58,7 +61,7 @@ export function AddQuantity({
   return (
     <AddQuantityContainer size={size}>
       <button type="button" onClick={handleDecreaseOneCoffee}>
-        {<Minus size={14} color={defaultTheme.purple} />}
+        {<Minus size={14} />}
       </button>
 
       <input
@@ -76,7 +79,7 @@ export function AddQuantity({
         }}
       />
       <button type="button" onClick={handleAddOneCoffee}>
-        {<Plus size={14} color={defaultTheme.purple} />}
+        {<Plus size={14} />}
       </button>
 
       {addToCartButton ? (

@@ -25,6 +25,7 @@ export const PaymentType = styled.label`
 
   ${HiddenRadioButton}:checked + && {
     outline: 1px solid ${(props) => props.theme.purple};
+    background-color: ${(props) => props.theme['purple-light']};
   }
 
   &:hover {
