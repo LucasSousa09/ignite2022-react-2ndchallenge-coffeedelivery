@@ -1,16 +1,14 @@
-import {
-  MapPinLine,
-  CurrencyDollar,
-  Money,
-  Bank,
-  CreditCard,
-} from 'phosphor-react'
-import { useContext } from 'react'
+import { MapPinLine, CurrencyDollar } from 'phosphor-react'
+import { useForm } from 'react-hook-form'
+
+import { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContextProvider'
 
-import { defaultTheme } from '../../styles/theme/default'
-import { formatPrice } from '../../utils/formatPrice'
 import { CoffeeOrderCard } from './components/CoffeeOrderCard'
+import { PaymentTypeRadio } from './components/PaymentTypeRadio'
+import { PaymentConfirmation } from './components/PaymentConfirmation'
+
+import { defaultTheme } from '../../styles/theme/default'
 
 import {
   AddressContainer,
@@ -24,28 +22,29 @@ import {
   UfInput,
   CheckoutContainer,
   PaymentContainer,
-  PaymentType,
-  PaymentConfirmation,
   OrderConfirmationButton,
 } from './styles'
 
 export function Checkout() {
   const { cart } = useContext(CartContext)
+  const { register, handleSubmit } = useForm()
 
-  const totalOfItemsPrice = cart.reduce(
-    (acc, coffee) => acc + coffee.price * coffee.quantity,
-    0,
-  )
+  const [checkedButton, setCheckedButton] = useState('credit-card')
 
-  const shipmentTax = 3.5
+  function handleCheckRadioButton(registeredName: string) {
+    setCheckedButton(registeredName)
+  }
 
-  const totalBiling = shipmentTax + totalOfItemsPrice
+  function handleSentShipmentAddress(data: any) {
+    console.log(data)
+  }
 
   return (
     <CheckoutContainer>
-      <form>
+      <form onSubmit={handleSubmit(handleSentShipmentAddress)}>
         <div>
           <h2>Complete seu pedido</h2>
+
           <InputContainer>
             <header>
               <MapPinLine size={22} color={defaultTheme['yellow-dark']} />
@@ -56,37 +55,60 @@ export function Checkout() {
             </header>
 
             <AddressContainer>
-              <CepInput id="cep" type="text" placeholder="CEP" required />
+              <CepInput
+                id="cep"
+                type="text"
+                placeholder="CEP"
+                required
+                {...register('zipCode')}
+              />
+
               <StreetInput
                 className="street"
                 type="text"
                 placeholder="Rua"
                 required
+                {...register('street')}
               />
+
               <NumberInput
                 className="number"
                 type="number"
                 placeholder="Número"
                 required
+                {...register('houseNumber', { valueAsNumber: true })}
               />
+
               <ComplementInput
                 className="complement"
                 type="text"
                 placeholder="Complemento"
+                {...register('complement')}
               />
+
               <DistrictInput
                 className="district"
                 type="text"
                 placeholder="Bairro"
                 required
+                {...register('district')}
               />
+
               <CityInput
                 className="city"
                 type="text"
                 placeholder="Cidade"
                 required
+                {...register('city')}
               />
-              <UfInput className="uf" type="text" placeholder="UF" required />
+
+              <UfInput
+                className="uf"
+                type="text"
+                placeholder="UF"
+                required
+                {...register('state')}
+              />
             </AddressContainer>
           </InputContainer>
 
@@ -103,44 +125,33 @@ export function Checkout() {
             </header>
 
             <PaymentContainer>
-              <input
-                type="radio"
-                name="payment-type"
+              <PaymentTypeRadio
+                handleCheckRadioButton={handleCheckRadioButton}
                 id="credit-card"
                 value="credit-card"
+                checkedButton={checkedButton}
               />
-              <PaymentType htmlFor="credit-card">
-                <CreditCard size={16} color={defaultTheme.purple} />
-                Cartão de Crédito
-              </PaymentType>
 
-              <input
-                type="radio"
-                name="payment-type"
+              <PaymentTypeRadio
+                handleCheckRadioButton={handleCheckRadioButton}
                 id="debit-card"
                 value="debit-card"
+                checkedButton={checkedButton}
               />
-              <PaymentType htmlFor="debit-card">
-                <Bank size={16} color={defaultTheme.purple} />
-                Cartão de Débito
-              </PaymentType>
 
-              <input
-                type="radio"
-                name="payment-type"
+              <PaymentTypeRadio
+                handleCheckRadioButton={handleCheckRadioButton}
                 id="money"
                 value="money"
+                checkedButton={checkedButton}
               />
-              <PaymentType htmlFor="money">
-                <Money size={16} color={defaultTheme.purple} />
-                Dinheiro
-              </PaymentType>
             </PaymentContainer>
           </InputContainer>
         </div>
 
         <div>
           <h2>Cafés selecionados</h2>
+
           <InputContainer coffeeOrder>
             {cart.map((coffee) => {
               return (
@@ -153,32 +164,10 @@ export function Checkout() {
                 />
               )
             })}
-            <PaymentConfirmation>
-              <div>
-                <span>Total de itens</span>
-                <span>{formatPrice(totalOfItemsPrice)}</span>
-              </div>
-              <div>
-                <span>Entrega</span>
-                <span>
-                  {!totalOfItemsPrice
-                    ? formatPrice(0)
-                    : formatPrice(shipmentTax)}
-                </span>
-              </div>
-              <div>
-                <strong>Total</strong>
-                <strong>
-                  {!totalOfItemsPrice
-                    ? formatPrice(0)
-                    : formatPrice(totalBiling)}
-                </strong>
-              </div>
-            </PaymentConfirmation>
-            <OrderConfirmationButton
-              disabled={!totalOfItemsPrice}
-              type="submit"
-            >
+
+            <PaymentConfirmation />
+
+            <OrderConfirmationButton type="submit">
               Confirmar Pedido
             </OrderConfirmationButton>
           </InputContainer>

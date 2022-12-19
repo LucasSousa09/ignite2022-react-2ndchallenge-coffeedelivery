@@ -132,68 +132,6 @@ export const PaymentContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-
-  input[type='radio'] {
-    display: none;
-  }
-`
-
-export const PaymentType = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding: 16px;
-
-  font-size: 0.75rem;
-  line-height: 1.2rem;
-
-  border-radius: 6px;
-
-  color: ${(props) => props.theme['base-text']};
-  background-color: ${(props) => props.theme['base-button']};
-
-  text-transform: uppercase;
-
-  &:hover {
-    cursor: pointer;
-  }
-`
-
-export const PaymentConfirmation = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  div + & {
-    padding-top: 24px;
-    border-top: 1px solid ${(props) => props.theme['base-button']};
-  }
-
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    span {
-      font-size: 0.875rem;
-      line-height: 1.125rem;
-
-      color: ${(props) => props.theme['base-text']};
-    }
-
-    span + span {
-      font-size: 1rem;
-      line-height: 1.3rem;
-    }
-
-    strong {
-      font-size: 1.25rem;
-      line-height: 1.625rem;
-
-      color: ${(props) => props.theme['base-subtitle']};
-    }
-  }
 `
 
 export const OrderConfirmationButton = styled.button`

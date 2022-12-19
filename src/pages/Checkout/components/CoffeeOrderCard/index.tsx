@@ -1,11 +1,11 @@
 import { Trash } from 'phosphor-react'
 import { useContext } from 'react'
 
-import { AddQuantity } from '../../../components/AddQuantity'
-import { CartContext } from '../../../contexts/CartContextProvider'
+import { AddQuantity } from '../../../../components/AddQuantity'
+import { CartContext } from '../../../../contexts/CartContextProvider'
 
-import { defaultTheme } from '../../../styles/theme/default'
-import { formatPrice } from '../../../utils/formatPrice'
+import { defaultTheme } from '../../../../styles/theme/default'
+import { formatPrice } from '../../../../utils/formatPrice'
 
 import { CoffeeOrder, CoffeeOrderCardContainer } from './styles'
 
