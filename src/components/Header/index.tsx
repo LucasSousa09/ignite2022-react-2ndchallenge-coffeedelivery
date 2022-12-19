@@ -20,7 +20,7 @@ export function Header() {
       <div>
         <UserLocale>
           <MapPin weight="fill" size={20} color={defaultTheme.purple} />
-          Porto Alegre, RS
+          Guaratinga, BA
         </UserLocale>
         <CartLink
           to="/checkout"
