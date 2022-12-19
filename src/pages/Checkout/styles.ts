@@ -86,6 +86,11 @@ export const AddressContainer = styled.div`
       color: ${(props) => props.theme['base-label']};
     }
 
+    &:focus {
+      border: 1px solid ${(props) => props.theme['yellow-dark']};
+      box-shadow: none;
+    }
+
     &:not(:required) {
       background: ${(props) => props.theme['base-input']} url('/optional.svg')
         no-repeat right;
@@ -94,7 +99,7 @@ export const AddressContainer = styled.div`
   }
 `
 
-export const CepInput = styled.input`
+export const ZipCodeInput = styled.input`
   max-width: 200px;
   grid-area: cep;
 `

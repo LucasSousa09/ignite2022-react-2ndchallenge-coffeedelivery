@@ -3,13 +3,18 @@ import { CreditCard, Bank, Money } from 'phosphor-react'
 import { HiddenRadioButton, PaymentType } from './styles'
 import { defaultTheme } from '../../../../styles/theme/default'
 
-import { useForm } from 'react-hook-form'
+import { UseFormRegister } from 'react-hook-form'
+
+import { ShipingFormData } from '../../index'
+
+type PaymentTypeId = 'credit-card' | 'debit-card' | 'money'
 
 interface PaymentTypeRadioProps {
-  id: string
+  id: PaymentTypeId
   value: string
   checkedButton: string
-  handleCheckRadioButton: (props: string) => void
+  register: UseFormRegister<ShipingFormData>
+  handleCheckRadioButton: (props: PaymentTypeId) => void
 }
 
 export function PaymentTypeRadio({
@@ -17,9 +22,8 @@ export function PaymentTypeRadio({
   value,
   checkedButton,
   handleCheckRadioButton,
+  register,
 }: PaymentTypeRadioProps) {
-  const { register } = useForm()
-
   return (
     <>
       <HiddenRadioButton
@@ -28,7 +32,7 @@ export function PaymentTypeRadio({
         value={value}
         onClick={() => handleCheckRadioButton(id)}
         checked={checkedButton === id}
-        {...register('payment-type', { required: true })}
+        {...register('paymentType', { required: true })}
       />
 
       {id === 'credit-card' && (

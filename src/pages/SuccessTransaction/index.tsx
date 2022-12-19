@@ -1,4 +1,5 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useContext } from 'react'
 
 import {
   MainContainer,
@@ -12,8 +13,12 @@ import { defaultTheme } from '../../styles/theme/default'
 
 import ilustrationImg from '../../assets/illustration.svg'
 import { DeliverySnippet } from './components/DeliverySnippet'
+import { ShipmentContext } from '../../contexts/ShipingContextProvider'
 
 export function SuccessTransaction() {
+  const { shipingData } = useContext(ShipmentContext)
+
+  console.log(shipingData)
   return (
     <MainContainer>
       <DeliveryContainer>
@@ -23,8 +28,8 @@ export function SuccessTransaction() {
           <DeliveryInfoContainer>
             <DeliverySnippet
               iconBgColor={defaultTheme.purple}
-              text="Entrega em Farrapos - Porto Alegre, RS"
-              highlightedText="Rua João Daniel Martinelli, 102"
+              text={`Entrega em ${shipingData.city}, ${shipingData.state}`}
+              highlightedText={`Rua ${shipingData.street}, ${shipingData.houseNumber}`}
             >
               <MapPin color={defaultTheme.white} size={16} weight="fill" />
             </DeliverySnippet>
@@ -40,7 +45,19 @@ export function SuccessTransaction() {
             <DeliverySnippet
               iconBgColor={defaultTheme['yellow-dark']}
               text="Pagamento na entrega"
-              highlightedText="Cartão de Crédito"
+              highlightedText={`
+                ${
+                  shipingData.paymentType === 'credit-card'
+                    ? 'Cartão de crédito'
+                    : ''
+                }
+                ${
+                  shipingData.paymentType === 'debit-card'
+                    ? 'Cartão de Débito'
+                    : ''
+                }
+                ${shipingData.paymentType === 'money' ? 'Dinheiro' : ''}
+              `}
             >
               <CurrencyDollar
                 color={defaultTheme.white}

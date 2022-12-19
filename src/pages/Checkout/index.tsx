@@ -1,6 +1,10 @@
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 
+import { useNavigate } from 'react-router-dom'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
 import { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContextProvider'
 
@@ -13,7 +17,7 @@ import { defaultTheme } from '../../styles/theme/default'
 import {
   AddressContainer,
   InputContainer,
-  CepInput,
+  ZipCodeInput,
   StreetInput,
   NumberInput,
   ComplementInput,
@@ -24,19 +28,53 @@ import {
   PaymentContainer,
   OrderConfirmationButton,
 } from './styles'
+import { ShipmentContext } from '../../contexts/ShipingContextProvider'
+
+const ShipmentFormSchema = zod.object({
+  city: zod.string().min(3, 'A cidade precisa ter no minímo 3 caracteres'),
+  complement: zod
+    .string()
+    .max(6, 'O complemento deve ter no máximo 6 caracteres'),
+  district: zod.string().min(3, 'O bairro deve ter no minímo 3 caracteres'),
+  houseNumber: zod
+    .number()
+    .min(0, 'O número da casa não deve ser menor que zero'),
+  paymentType: zod.enum(['credit-card', 'debit-card', 'money']),
+  state: zod
+    .string()
+    .min(2, 'A UF deve ter no mínimo 2 caracteres')
+    .max(2, 'A UF deve ter no máximo 2 caracteres'),
+  street: zod.string().min(3, 'A rua deve ter no minímo 3 caracteres'),
+  zipCode: zod
+    .string()
+    .min(8, 'O CEP deve ter no mínimo 8 números')
+    .max(8, 'O CEP deve ter no máximo 8 números'),
+})
+
+export type ShipingFormData = zod.infer<typeof ShipmentFormSchema>
+
+type RadioButtonRegisteredName = 'credit-card' | 'debit-card' | 'money'
 
 export function Checkout() {
   const { cart } = useContext(CartContext)
-  const { register, handleSubmit } = useForm()
+  const { setShipingInformation } = useContext(ShipmentContext)
 
-  const [checkedButton, setCheckedButton] = useState('credit-card')
+  const { register, handleSubmit } = useForm<ShipingFormData>({
+    resolver: zodResolver(ShipmentFormSchema),
+  })
 
-  function handleCheckRadioButton(registeredName: string) {
+  const navigate = useNavigate()
+
+  const [checkedButton, setCheckedButton] =
+    useState<RadioButtonRegisteredName>('credit-card')
+
+  function handleCheckRadioButton(registeredName: RadioButtonRegisteredName) {
     setCheckedButton(registeredName)
   }
 
-  function handleSentShipmentAddress(data: any) {
-    console.log(data)
+  function handleSentShipmentAddress(data: ShipingFormData) {
+    setShipingInformation(data)
+    navigate('/success-transaction')
   }
 
   return (
@@ -55,8 +93,7 @@ export function Checkout() {
             </header>
 
             <AddressContainer>
-              <CepInput
-                id="cep"
+              <ZipCodeInput
                 type="text"
                 placeholder="CEP"
                 required
@@ -64,48 +101,48 @@ export function Checkout() {
               />
 
               <StreetInput
-                className="street"
                 type="text"
                 placeholder="Rua"
+                className="street"
                 required
                 {...register('street')}
               />
 
               <NumberInput
-                className="number"
                 type="number"
                 placeholder="Número"
+                className="number"
                 required
                 {...register('houseNumber', { valueAsNumber: true })}
               />
 
               <ComplementInput
-                className="complement"
                 type="text"
                 placeholder="Complemento"
+                className="complement"
                 {...register('complement')}
               />
 
               <DistrictInput
-                className="district"
                 type="text"
                 placeholder="Bairro"
+                className="district"
                 required
                 {...register('district')}
               />
 
               <CityInput
-                className="city"
                 type="text"
                 placeholder="Cidade"
+                className="city"
                 required
                 {...register('city')}
               />
 
               <UfInput
-                className="uf"
                 type="text"
                 placeholder="UF"
+                className="uf"
                 required
                 {...register('state')}
               />
@@ -130,6 +167,7 @@ export function Checkout() {
                 id="credit-card"
                 value="credit-card"
                 checkedButton={checkedButton}
+                register={register}
               />
 
               <PaymentTypeRadio
@@ -137,6 +175,7 @@ export function Checkout() {
                 id="debit-card"
                 value="debit-card"
                 checkedButton={checkedButton}
+                register={register}
               />
 
               <PaymentTypeRadio
@@ -144,6 +183,7 @@ export function Checkout() {
                 id="money"
                 value="money"
                 checkedButton={checkedButton}
+                register={register}
               />
             </PaymentContainer>
           </InputContainer>

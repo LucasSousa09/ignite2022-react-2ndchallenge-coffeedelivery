@@ -57,6 +57,12 @@ export const CoffeeOrder = styled.div`
       color: ${(props) => props.theme['base-text']};
       background-color: ${(props) => props.theme['base-button']};
 
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: ${(props) => props.theme['base-hover']};
+      }
+
       text-transform: uppercase;
     }
   }
