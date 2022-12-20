@@ -1,5 +1,9 @@
-import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { useContext } from 'react'
+import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+
+import { ShipmentContext } from '../../contexts/ShipingContextProvider'
+
+import { DeliverySnippet } from './components/DeliverySnippet'
 
 import {
   MainContainer,
@@ -12,18 +16,16 @@ import {
 import { defaultTheme } from '../../styles/theme/default'
 
 import ilustrationImg from '../../assets/illustration.svg'
-import { DeliverySnippet } from './components/DeliverySnippet'
-import { ShipmentContext } from '../../contexts/ShipingContextProvider'
 
 export function SuccessTransaction() {
   const { shipingData } = useContext(ShipmentContext)
 
-  console.log(shipingData)
   return (
     <MainContainer>
       <DeliveryContainer>
         <h1>Uhu! Pedido confirmado</h1>
         <p>Agora é só aguardar que logo o café chegará até você</p>
+
         <LinearBackground>
           <DeliveryInfoContainer>
             <DeliverySnippet
@@ -69,7 +71,10 @@ export function SuccessTransaction() {
         </LinearBackground>
       </DeliveryContainer>
       <ImageContainer>
-        <img src={ilustrationImg} alt="" />
+        <img
+          src={ilustrationImg}
+          alt="Entregador de café numa moto levando o café para o cliente"
+        />
       </ImageContainer>
     </MainContainer>
   )
