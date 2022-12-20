@@ -63,7 +63,10 @@ export function Home() {
             </Snippet>
           </SnippetsContainer>
         </div>
-        <img src={heroImg} alt="" />
+        <img
+          src={heroImg}
+          alt="Um copo de café, com vários tipos de café no background"
+        />
       </MainContainer>
 
       <CoffesContainer>
