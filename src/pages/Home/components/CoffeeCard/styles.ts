@@ -24,6 +24,17 @@ export const CoffeeCardContainer = styled.div`
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px;
   }
+
+  @media (max-width: 800px) {
+    padding: 0 12px 12px;
+    max-width: 160px;
+
+    border-top-right-radius: 21.5px;
+    border-bottom-left-radius: 21.5px;
+
+    border-top-left-radius: 3.6px;
+    border-bottom-right-radius: 3.6px;
+  }
 `
 
 export const CoffeeDescription = styled.div`
@@ -96,6 +107,48 @@ export const CoffeeDescription = styled.div`
       line-height: 0.9rem;
     }
   }
+
+  @media (max-width: 800px) {
+    img {
+      width: 72px;
+      height: 72px;
+    }
+
+    span {
+      font-size: 0.5rem;
+      line-height: 0.6rem;
+    }
+
+    strong {
+      margin-top: 0.75rem;
+      font-size: 0.825rem;
+      line-height: 1rem;
+    }
+
+    p {
+      font-size: 0.625rem;
+    }
+
+    & > div {
+      display: flex;
+      justify-content: center;
+      width: 136px;
+      padding: 0 12px;
+      white-space: nowrap;
+      overflow-x: scroll;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      & > .giveMarginLeft:first-of-type {
+        margin-left: 28px;
+      }
+    }
+
+    & > div::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `
 
 export const AddQuantityToCartContainer = styled.div`
@@ -128,6 +181,14 @@ export const AddQuantityToCartContainer = styled.div`
     span {
       strong {
         font-size: 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    span {
+      strong {
+        font-size: 0.825rem;
       }
     }
   }

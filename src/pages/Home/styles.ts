@@ -68,6 +68,47 @@ export const MainContainer = styled.main`
     }
   }
 
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    position: relative;
+
+    img {
+      position: absolute;
+      z-index: 0;
+
+      opacity: 0.2;
+
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -72%);
+    }
+
+    & > div {
+      z-index: 999;
+      max-width: 245px;
+
+      & > div:first-of-type {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+          text-align: center;
+          font-size: 1.5rem;
+          line-height: 1.93rem;
+        }
+
+        p {
+          text-align: center;
+          font-size: 0.75rem;
+          line-height: 1rem;
+
+          max-width: 204px;
+        }
+      }
+    }
+  }
+
   @media (min-width: 1240px) {
     padding: 5.875rem 10rem;
 
@@ -102,6 +143,14 @@ export const SnippetsContainer = styled.div`
   row-gap: 12px;
   column-gap: 22px;
 
+  @media (max-width: 1000px) {
+    margin-top: 84px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   @media (min-width: 1440px) {
     margin-top: 4.125rem;
 
@@ -123,10 +172,10 @@ export const CoffesContainer = styled.div`
     text-align: left;
   }
 
-  @media (min-width: 1240px) {
-  }
-
-  @media (min-width: 1412px) {
+  @media (max-width: 800px) {
+    h2 {
+      text-align: center;
+    }
   }
 `
 
@@ -139,6 +188,11 @@ export const CoffeCardsContainer = styled.div`
 
   @media (max-width: 1412px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
   }
 
   margin-top: 54px;

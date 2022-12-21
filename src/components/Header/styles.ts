@@ -23,6 +23,30 @@ export const HeaderContainer = styled.header`
   & > a {
     height: 40px;
   }
+
+  @media (max-width: 1240px) {
+    padding: 24px 120px;
+
+    & > a {
+      height: 32px;
+
+      & > img {
+        height: 32px;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    padding: 24px;
+
+    & > a {
+      height: 32px;
+
+      & > img {
+        height: 32px;
+      }
+    }
+  }
 `
 
 interface CartLinkProps {
@@ -62,6 +86,13 @@ export const CartLink = styled(Link)<CartLinkProps>`
     color: ${(props) => props.theme.white};
     background-color: ${(props) => props.theme['yellow-dark']};
   }
+
+  @media (max-width: 1240px) {
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 `
 
 export const UserLocale = styled.span`
@@ -76,4 +107,14 @@ export const UserLocale = styled.span`
   border-radius: 6px;
   color: ${(props) => props.theme['purple-dark']};
   background-color: ${(props) => props.theme['purple-light']};
+
+  @media (max-width: 1240px) {
+    font-size: 0.625rem;
+    line-height: 1rem;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 `

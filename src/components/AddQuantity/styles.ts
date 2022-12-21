@@ -71,6 +71,22 @@ export const AddQuantityContainer = styled.div<AddQuantityProps>`
       height: 2rem;
     }
   }
+
+  @media (max-width: 800px) {
+    & > button:first-of-type,
+    & > button:nth-child(3),
+    input {
+      font-size: 0.625rem;
+
+      width: 1.125rem;
+      height: 1.375rem;
+
+      svg {
+        width: 0.625rem;
+        height: 0.625rem;
+      }
+    }
+  }
 `
 
 export const AddToCartButton = styled.button`
@@ -112,6 +128,16 @@ export const AddToCartButton = styled.button`
     svg {
       width: 18px;
       height: 18px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 1.375rem;
+    height: 1.375rem;
+
+    svg {
+      width: 0.75rem;
+      height: 0.75rem;
     }
   }
 `

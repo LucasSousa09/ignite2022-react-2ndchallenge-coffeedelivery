@@ -29,9 +29,13 @@ export function CoffeeCard({
       <CoffeeDescription>
         <img src={coffeeImgSrc} alt="" />
         <div>
-          {tags.map((tag) => (
-            <span key={name + tag}>{tag}</span>
-          ))}
+          {tags.length > 2
+            ? tags.map((tag) => (
+                <span className="giveMarginLeft" key={name + tag}>
+                  {tag}
+                </span>
+              ))
+            : tags.map((tag) => <span key={name + tag}>{tag}</span>)}
         </div>
         <strong>{name}</strong>
         <p>{description}</p>
