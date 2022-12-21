@@ -34,4 +34,31 @@ export const PaymentConfirmationContainer = styled.div`
       color: ${(props) => props.theme['base-subtitle']};
     }
   }
+
+  @media (max-width: 600px) {
+    div + & {
+      padding-top: 12px;
+    }
+
+    div {
+      span {
+        font-size: 0.75rem;
+        line-height: 1.125rem;
+
+        color: ${(props) => props.theme['base-text']};
+      }
+
+      span + span {
+        font-size: 0.875rem;
+        line-height: 1rem;
+      }
+
+      strong {
+        font-size: 1.125rem;
+        line-height: 1.375rem;
+
+        color: ${(props) => props.theme['base-subtitle']};
+      }
+    }
+  }
 `

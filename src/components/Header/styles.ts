@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const HeaderContainer = styled.header`
+  z-index: 99999;
+
   position: fixed;
   top: 0;
 
@@ -37,7 +39,7 @@ export const HeaderContainer = styled.header`
   }
 
   @media (max-width: 800px) {
-    padding: 24px;
+    padding: 24px 40px;
 
     & > a {
       height: 32px;

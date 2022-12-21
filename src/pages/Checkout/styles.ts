@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const CheckoutContainer = styled.main`
+  margin-top: 104px;
   padding: 40px 160px;
 
   form {
@@ -16,6 +17,21 @@ export const CheckoutContainer = styled.main`
 
     color: ${(props) => props.theme['base-subtitle']};
   }
+
+  @media (max-width: 1440px) {
+    margin-top: 80px;
+  }
+
+  @media (max-width: 1240px) {
+    padding: 40px 120px;
+  }
+
+  @media (max-width: 800px) {
+    padding: 40px;
+    form {
+      flex-direction: column;
+    }
+  }
 `
 
 interface InputContainerProps {
@@ -23,17 +39,28 @@ interface InputContainerProps {
 }
 
 export const InputContainer = styled.div<InputContainerProps>`
+  margin: 15px auto 0;
+  padding: 40px;
+
   display: flex;
   flex-direction: column;
-  gap: ${(props) => (props.coffeeOrder ? 1.5 : 0)}rem;
 
-  margin-top: 15px;
-  padding: 2.5rem;
+  width: ${(props) => (props.coffeeOrder ? '448px' : '640px')};
+  gap: ${(props) => (props.coffeeOrder ? 1.5 : 0)}rem;
 
   border-radius: ${(props) =>
     props.coffeeOrder ? '6px 36px 6px 36px' : '6px'};
 
   background-color: ${(props) => props.theme['base-card']};
+
+  @media (max-width: 1440px) {
+    width: auto;
+  }
+
+  @media (max-width: 600px) {
+    gap: ${(props) => (props.coffeeOrder ? 0.75 : 0)}rem;
+    padding: 24px 16px;
+  }
 `
 
 export const OrderConfirmationButton = styled.button`

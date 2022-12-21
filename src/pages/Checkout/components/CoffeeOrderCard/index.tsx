@@ -26,21 +26,23 @@ export function CoffeeOrderCard({
 
   return (
     <CoffeeOrderCardContainer>
-      <img src={coffeeImg} alt="" />
-      <CoffeeOrder>
-        <span>{coffeeName}</span>
-        <div>
-          <AddQuantity
-            size={2}
-            quantity={quantity}
-            name={coffeeName}
-            coffeeImgSrc={coffeeImg}
-          />
-          <button onClick={() => removeCartCoffees(coffeeName)} type="button">
-            <Trash size={16} color={defaultTheme.purple} /> Remover
-          </button>
-        </div>
-      </CoffeeOrder>
+      <div>
+        <img src={coffeeImg} alt="" />
+        <CoffeeOrder>
+          <span>{coffeeName}</span>
+          <div>
+            <AddQuantity
+              size={2}
+              quantity={quantity}
+              name={coffeeName}
+              coffeeImgSrc={coffeeImg}
+            />
+            <button onClick={() => removeCartCoffees(coffeeName)} type="button">
+              <Trash size={16} color={defaultTheme.purple} /> Remover
+            </button>
+          </div>
+        </CoffeeOrder>
+      </div>
       <strong>{formatPrice(price * quantity)}</strong>
     </CoffeeOrderCardContainer>
   )

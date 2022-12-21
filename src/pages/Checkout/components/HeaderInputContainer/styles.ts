@@ -21,4 +21,14 @@ export const Header = styled.header`
 
     color: ${(props) => props.theme['base-text']};
   }
+
+  @media (max-width: 600px) {
+    h3 {
+      font-size: 0.875rem;
+    }
+
+    span {
+      font-size: 0.75rem;
+    }
+  }
 `

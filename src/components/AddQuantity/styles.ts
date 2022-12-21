@@ -63,8 +63,6 @@ export const AddQuantityContainer = styled.div<AddQuantityProps>`
   }
 
   @media (max-width: 1240px) {
-    margin-left: 8px;
-
     & > button:first-of-type,
     & > button:nth-child(3),
     input {
@@ -72,7 +70,7 @@ export const AddQuantityContainer = styled.div<AddQuantityProps>`
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     & > button:first-of-type,
     & > button:nth-child(3),
     input {
@@ -131,7 +129,7 @@ export const AddToCartButton = styled.button`
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     width: 1.375rem;
     height: 1.375rem;
 

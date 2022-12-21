@@ -34,40 +34,75 @@ export const Container = styled.div`
 
     &:not(:required) {
       background: ${(props) => props.theme['base-input']} url('/optional.svg')
-        no-repeat right;
+        no-repeat right 72%;
       background-origin: content-box;
+    }
+  }
+
+  @media (max-width: 800px) {
+    grid-template-areas:
+      'cep cep cep'
+      'street street street'
+      'number complement complement'
+      'district district uf'
+      'city city city';
+  }
+
+  @media (max-width: 400px) {
+    input {
+      &:not(:required) {
+        background-image: none;
+      }
     }
   }
 `
 
 export const ZipCodeInput = styled.input`
+  min-width: 0;
   max-width: 200px;
+
   grid-area: cep;
+
+  @media (min-width: 1240px) {
+    max-width: 200px;
+  }
 `
 
 export const StreetInput = styled.input`
+  min-width: 0;
   grid-area: street;
 `
 
 export const NumberInput = styled.input`
-  max-width: 200px;
+  min-width: 0;
   grid-area: number;
+
+  @media (min-width: 1240px) {
+    max-width: 200px;
+  }
 `
 
 export const ComplementInput = styled.input`
+  min-width: 0;
   grid-area: complement;
 `
 
 export const DistrictInput = styled.input`
-  max-width: 200px;
+  min-width: 0;
   grid-area: district;
+
+  @media (min-width: 1240px) {
+    max-width: 200px;
+  }
 `
 
 export const CityInput = styled.input`
+  min-width: 0;
   grid-area: city;
 `
 
 export const UfInput = styled.input`
+  min-width: 0;
   max-width: 60px;
   grid-area: uf;
 `

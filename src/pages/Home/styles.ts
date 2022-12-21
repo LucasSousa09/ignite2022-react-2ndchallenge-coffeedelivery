@@ -46,6 +46,7 @@ export const MainContainer = styled.main`
   }
 
   @media (max-width: 1240px) {
+    margin-top: 80px;
     padding: 42px 84px;
 
     & > div {
@@ -69,6 +70,8 @@ export const MainContainer = styled.main`
   }
 
   @media (max-width: 1000px) {
+    margin-bottom: 32px;
+
     flex-direction: column;
     position: relative;
 
@@ -182,6 +185,8 @@ export const CoffesContainer = styled.div`
 export const CoffeCardsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  margin-bottom: 16px;
 
   row-gap: 40px;
   column-gap: 32px;

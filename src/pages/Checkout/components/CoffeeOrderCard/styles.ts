@@ -1,6 +1,15 @@
 import styled from 'styled-components'
 
 export const CoffeeOrderCardContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  & > div {
+    display: flex;
+    gap: 20px;
+  }
+
   div + & {
     padding-top: 24px;
     border-top: 1px solid ${(props) => props.theme['base-button']};
@@ -14,17 +23,42 @@ export const CoffeeOrderCardContainer = styled.div`
   }
 
   strong {
-    margin-left: 50px;
+    font-size: 1rem;
+    line-height: 1.3rem;
 
     white-space: nowrap;
 
     color: ${(props) => props.theme['base-text']};
   }
+
+  @media (max-width: 600px) {
+    & > div {
+      gap: 16px;
+    }
+
+    div + & {
+      padding-top: 12px;
+    }
+
+    img {
+      width: 48px;
+      height: 48px;
+    }
+
+    strong {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 414px) {
+    img {
+      width: 48px;
+      height: 48px;
+    }
+  }
 `
 
 export const CoffeeOrder = styled.div`
-  margin-left: 20px;
-
   span {
     display: block;
     font-size: 1rem;
@@ -58,12 +92,30 @@ export const CoffeeOrder = styled.div`
       background-color: ${(props) => props.theme['base-button']};
 
       transition: background-color 0.2s ease;
+      text-transform: uppercase;
 
       &:hover {
         background-color: ${(props) => props.theme['base-hover']};
       }
+    }
+  }
 
-      text-transform: uppercase;
+  @media (max-width: 600px) {
+    span {
+      font-size: 0.875rem;
+    }
+
+    & > div {
+      button:nth-child(2) {
+        height: 1.375rem;
+
+        font-size: 0.625rem;
+
+        svg {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
+      }
     }
   }
 `

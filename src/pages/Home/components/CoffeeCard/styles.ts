@@ -25,7 +25,7 @@ export const CoffeeCardContainer = styled.div`
     border-bottom-right-radius: 5px;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     padding: 0 12px 12px;
     max-width: 160px;
 
@@ -108,7 +108,7 @@ export const CoffeeDescription = styled.div`
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     img {
       width: 72px;
       height: 72px;
@@ -153,6 +153,7 @@ export const CoffeeDescription = styled.div`
 
 export const AddQuantityToCartContainer = styled.div`
   margin-top: 2rem;
+  padding: 0 4px;
 
   display: flex;
   align-items: center;
@@ -176,6 +177,7 @@ export const AddQuantityToCartContainer = styled.div`
   }
 
   @media (max-width: 1240px) {
+    padding: 0;
     margin-top: 1.3rem;
 
     span {
@@ -185,7 +187,7 @@ export const AddQuantityToCartContainer = styled.div`
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     span {
       strong {
         font-size: 0.825rem;
