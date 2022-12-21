@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const LayoutContainer = styled.div`
+  position: relative;
   max-width: 90rem;
   margin: 0 auto;
 

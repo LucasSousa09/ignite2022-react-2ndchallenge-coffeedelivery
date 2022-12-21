@@ -2,11 +2,18 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0;
+
+  max-width: 1440px;
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 32px 160px;
 
+  background: ${(props) => props.theme.background};
   div {
     display: flex;
     gap: 0.75rem;

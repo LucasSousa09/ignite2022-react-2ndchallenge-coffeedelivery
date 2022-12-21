@@ -48,12 +48,12 @@ export function CartContextProvider({ children }: CartContainerProviderProps) {
   useEffect(() => {
     const cartStateJSON = JSON.stringify(cart)
 
-    cart.forEach((coffee) =>
-      updateCoffeesQuantity(coffee.name, coffee.quantity),
-    )
+    cart.forEach((coffee) => {
+      return updateCoffeesQuantity(coffee.name, coffee.quantity)
+    })
 
     localStorage.setItem('@coffee-delivery:cart-state-1.0.0', cartStateJSON)
-  }, [cart, updateCoffeesQuantity])
+  }, [cart])
 
   function addCoffeeToCart({
     name,

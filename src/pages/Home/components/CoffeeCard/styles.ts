@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const CoffeeCardContainer = styled.div`
+  max-width: 256px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +14,16 @@ export const CoffeeCardContainer = styled.div`
 
   background-color: ${(props) => props.theme['base-card']};
   padding: 0 20px 20px;
+
+  @media (max-width: 1240px) {
+    max-width: 218px;
+
+    border-top-right-radius: 29px;
+    border-bottom-left-radius: 29px;
+
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
 `
 
 export const CoffeeDescription = styled.div`
@@ -62,6 +73,29 @@ export const CoffeeDescription = styled.div`
 
     color: ${(props) => props.theme['base-label']};
   }
+
+  @media (max-width: 1240px) {
+    img {
+      width: 98px;
+      height: 98px;
+    }
+
+    span {
+      margin-top: 0.65rem;
+      font-size: 0.6rem;
+      line-height: 0.65rem;
+    }
+
+    strong {
+      font-size: 1.1rem;
+      line-height: 1.4rem;
+    }
+
+    p {
+      font-size: 0.7rem;
+      line-height: 0.9rem;
+    }
+  }
 `
 
 export const AddQuantityToCartContainer = styled.div`
@@ -74,8 +108,6 @@ export const AddQuantityToCartContainer = styled.div`
 
   span {
     flex: 1;
-    font-size: 0.875rem;
-    line-height: 1.125rem;
     color: ${(props) => props.theme['base-text']};
 
     strong {
@@ -88,5 +120,15 @@ export const AddQuantityToCartContainer = styled.div`
   & > div {
     display: flex;
     align-items: center;
+  }
+
+  @media (max-width: 1240px) {
+    margin-top: 1.3rem;
+
+    span {
+      strong {
+        font-size: 1rem;
+      }
+    }
   }
 `

@@ -11,6 +11,7 @@ import { defaultTheme } from '../../styles/theme/default'
 import {
   CoffeCardsContainer,
   CoffesContainer,
+  HomeContainer,
   MainContainer,
   SnippetsContainer,
 } from './styles'
@@ -21,7 +22,7 @@ export function Home() {
   const { coffees } = useContext(CoffeesContext)
 
   return (
-    <>
+    <HomeContainer>
       <MainContainer>
         <div>
           <div>
@@ -37,11 +38,7 @@ export function Home() {
               iconContainerBgColor={defaultTheme.yellow}
               message="Compra simples e segura"
             >
-              <ShoppingCart
-                color={defaultTheme.white}
-                size={16}
-                weight="fill"
-              />
+              <ShoppingCart color={defaultTheme.white} weight="fill" />
             </Snippet>
             <Snippet
               iconContainerBgColor={defaultTheme['base-text']}
@@ -87,6 +84,6 @@ export function Home() {
           })}
         </CoffeCardsContainer>
       </CoffesContainer>
-    </>
+    </HomeContainer>
   )
 }

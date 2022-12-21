@@ -61,6 +61,16 @@ export const AddQuantityContainer = styled.div<AddQuantityProps>`
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
   }
+
+  @media (max-width: 1240px) {
+    margin-left: 8px;
+
+    & > button:first-of-type,
+    & > button:nth-child(3),
+    input {
+      height: 2rem;
+    }
+  }
 `
 
 export const AddToCartButton = styled.button`
@@ -93,5 +103,15 @@ export const AddToCartButton = styled.button`
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+  }
+
+  @media (max-width: 1240px) {
+    width: 2rem;
+    height: 2rem;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 `

@@ -9,6 +9,14 @@ export const SnippetStyle = styled.div<SnippetsProps>`
   align-items: center;
   gap: 0.75rem;
 
+  font-size: 12px;
+  line-height: 16px;
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+
   div {
     display: flex;
     align-items: center;
@@ -23,5 +31,14 @@ export const SnippetStyle = styled.div<SnippetsProps>`
     flex: 1;
     color: ${(props) => props.theme['base-text']};
     white-space: nowrap;
+  }
+
+  @media (min-width: 1240px) {
+    font-size: 16px;
+    line-height: 1.3rem;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 `
