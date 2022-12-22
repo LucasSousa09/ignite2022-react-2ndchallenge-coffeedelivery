@@ -70,6 +70,7 @@ export const InputContainer = styled.div<InputContainerProps>`
   }
 
   @media (max-width: 600px) {
+    min-width: 0;
     gap: ${(props) => (props.coffeeOrder ? 0.75 : 0)}rem;
     padding: 24px 16px;
   }

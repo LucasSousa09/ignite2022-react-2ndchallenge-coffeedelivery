@@ -39,5 +39,14 @@ export const DeliverySnippetContainer = styled.div<DeliverySnippetProps>`
       line-height: 1.3rem;
       color: ${(props) => props.theme['base-text']};
     }
+
+    @media (max-width: 1240px) {
+      span {
+        font-size: 0.875rem;
+      }
+      strong {
+        font-size: 0.875rem;
+      }
+    }
   }
 `
