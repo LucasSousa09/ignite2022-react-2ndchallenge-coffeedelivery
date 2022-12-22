@@ -33,6 +33,14 @@ export const PaymentType = styled.label`
     background-color: ${(props) => props.theme['base-hover']};
   }
 
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+
+    text-align: center;
+  }
+
   @media (max-width: 800px) {
     width: 100%;
     justify-content: center;

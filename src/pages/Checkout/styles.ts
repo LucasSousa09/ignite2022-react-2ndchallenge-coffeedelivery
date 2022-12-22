@@ -26,6 +26,10 @@ export const CheckoutContainer = styled.main`
     padding: 40px 120px;
   }
 
+  @media (max-width: 1000px) {
+    padding: 40px 12px;
+  }
+
   @media (max-width: 800px) {
     padding: 40px;
     form {
@@ -55,6 +59,14 @@ export const InputContainer = styled.div<InputContainerProps>`
 
   @media (max-width: 1440px) {
     width: auto;
+  }
+
+  @media (max-width: 1200px) {
+    min-width: 420px;
+  }
+
+  @media (max-width: 900px) {
+    min-width: 370px;
   }
 
   @media (max-width: 600px) {
