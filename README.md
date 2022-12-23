@@ -23,3 +23,5 @@ Available at: https://coffee-delivery-portfolio.netlify.app/
 - zod
 - Styled Components
 - Phosphor Icons
+- localStorage
+- React Toastfy
