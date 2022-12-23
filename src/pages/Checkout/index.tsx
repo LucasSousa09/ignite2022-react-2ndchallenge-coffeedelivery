@@ -1,6 +1,8 @@
 import * as zod from 'zod'
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
@@ -51,9 +53,16 @@ export function Checkout() {
   const { cart } = useContext(CartContext)
   const { setShipingInformation } = useContext(ShipmentContext)
 
-  const { register, handleSubmit } = useForm<ShipingFormData>({
+  const { register, handleSubmit, formState } = useForm<ShipingFormData>({
     resolver: zodResolver(ShipmentFormSchema),
   })
+
+  const notify = () => {
+    if (Object.keys(formState.errors).length > 0) {
+      const message = Object.entries(formState.errors)[0]
+      toast.error(message[1].message)
+    }
+  }
 
   const navigate = useNavigate()
 
@@ -70,6 +79,8 @@ export function Checkout() {
 
   return (
     <CheckoutContainer>
+      <ToastContainer position="top-left" theme="colored" />
+
       <form onSubmit={handleSubmit(handleSentShipmentAddress)}>
         <div>
           <h2>Complete seu pedido</h2>
@@ -115,7 +126,7 @@ export function Checkout() {
 
             <PaymentConfirmation />
 
-            <OrderConfirmationButton type="submit">
+            <OrderConfirmationButton onClick={notify} type="submit">
               Confirmar Pedido
             </OrderConfirmationButton>
           </InputContainer>
