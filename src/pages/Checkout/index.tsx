@@ -1,5 +1,5 @@
 import * as zod from 'zod'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -27,24 +27,24 @@ import { HeaderInputContainer } from './components/HeaderInputContainer'
 import { PaymentTypeContainer } from './components/PaymentTypeContainer'
 
 const ShipmentFormSchema = zod.object({
-  city: zod.string().min(3, 'A cidade precisa ter no minímo 3 caracteres'),
-  complement: zod
-    .string()
-    .max(6, 'O complemento deve ter no máximo 6 caracteres'),
-  district: zod.string().min(3, 'O bairro deve ter no minímo 3 caracteres'),
-  houseNumber: zod
-    .number()
-    .min(0, 'O número da casa não deve ser menor que zero'),
-  paymentType: zod.enum(['credit-card', 'debit-card', 'money']),
-  state: zod
-    .string()
-    .min(2, 'A UF deve ter no mínimo 2 caracteres')
-    .max(2, 'A UF deve ter no máximo 2 caracteres'),
-  street: zod.string().min(3, 'A rua deve ter no minímo 3 caracteres'),
   zipCode: zod
     .string()
     .min(8, 'O CEP deve ter no mínimo 8 números')
     .max(8, 'O CEP deve ter no máximo 8 números'),
+  street: zod.string().min(3, 'A rua deve ter no minímo 3 caracteres'),
+  houseNumber: zod
+    .number()
+    .min(0, 'O número da casa não deve ser menor que zero'),
+  complement: zod
+    .string()
+    .max(6, 'O complemento deve ter no máximo 6 caracteres'),
+  district: zod.string().min(3, 'O bairro deve ter no minímo 3 caracteres'),
+  city: zod.string().min(3, 'A cidade precisa ter no minímo 3 caracteres'),
+  state: zod
+    .string()
+    .min(2, 'A UF deve ter no mínimo 2 caracteres')
+    .max(2, 'A UF deve ter no máximo 2 caracteres'),
+  paymentType: zod.enum(['credit-card', 'debit-card', 'money']),
 })
 
 export type ShipingFormData = zod.infer<typeof ShipmentFormSchema>
@@ -57,12 +57,15 @@ export function Checkout() {
     resolver: zodResolver(ShipmentFormSchema),
   })
 
-  const notify = () => {
-    if (Object.keys(formState.errors).length > 0) {
-      const message = Object.entries(formState.errors)[0]
-      toast.error(message[1].message)
+  useEffect(() => {
+    const numberOfErrors = Object.keys(formState.errors).length
+    if (numberOfErrors > 0) {
+      for (let nOE = 0; nOE < numberOfErrors; nOE++) {
+        const message = Object.entries(formState.errors)[nOE]
+        toast.error(message[1].message)
+      }
     }
-  }
+  }, [formState.errors])
 
   const navigate = useNavigate()
 
@@ -126,7 +129,7 @@ export function Checkout() {
 
             <PaymentConfirmation />
 
-            <OrderConfirmationButton onClick={notify} type="submit">
+            <OrderConfirmationButton type="submit">
               Confirmar Pedido
             </OrderConfirmationButton>
           </InputContainer>
