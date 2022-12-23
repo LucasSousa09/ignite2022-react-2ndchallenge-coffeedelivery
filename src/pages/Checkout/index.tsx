@@ -60,11 +60,16 @@ export function Checkout() {
   useEffect(() => {
     const numberOfErrors = Object.keys(formState.errors).length
     if (numberOfErrors > 0) {
-      for (let nOE = 0; nOE < numberOfErrors; nOE++) {
-        const message = Object.entries(formState.errors)[nOE]
-        toast.error(message[1].message)
-      }
+      const message = Object.entries(formState.errors)[0]
+      toast.error(message[1].message)
     }
+    // Display all errors
+    // if (numberOfErrors > 0) {
+    //   for (let nOE = 0; nOE < numberOfErrors; nOE++) {
+    //     const message = Object.entries(formState.errors)[nOE]
+    //     toast.error(message[1].message)
+    //   }
+    // }
   }, [formState.errors])
 
   const navigate = useNavigate()
